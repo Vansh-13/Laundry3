@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Laundry System</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+        * {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: all 0.2s ease-in-out;
+        }
+
+        body {
+            background-color: #f4f4f4;
+        }
+
+        header {
+            background: linear-gradient(to right, #0056b3, #007bff);
+            color: white;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            flex-wrap: wrap;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        header img {
+            height: 50px; /* Adjust logo size */
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 20px; /* Space between nav items */
+        }
+
+        nav ul li {
+            display: inline-block;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: white;
+            padding: 10px 15px; /* Padding for links */
+            transition: all 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            background-color: #ffc107; /* Hover effect */
+            color: #000;
+            border-radius: 5px; /* Rounded corners */
+        }
+
+        .form-container {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+            margin-top: 80px; /* Add margin for fixed navbar */
+        }
+
+        footer {
+            text-align: center;
+            padding: 15px 0;
+            background-color: #0056b3;
+            color: white;
+            position: relative; /* Changed to relative */
+            bottom: 0;
+            left: 0;
+            width: 100%;
+        }
+
+        /* Media Queries */
+        @media (max-width: 1024px) {
+            nav {
+                width: 100%; /* Full width for mobile */
+                justify-content: flex-end; /* Align items to the right */
+            }
+
+            nav ul {
+                justify-content: flex-end; /* Align nav items to the right */
+                flex-direction: row; /* Keep items in a row */
+                width: auto; /* Reset width for right alignment */
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+                width: 100%;
+                background-color: #007bff; /* Background color for mobile menu */
+                display: none; /* Hide by default */
+                text-align: center;
+            }
+
+            nav ul.show {
+                display: flex; /* Show on toggle */
+            }
+
+            .menu-toggle {
+                display: block; /* Show hamburger menu */
+                cursor: pointer;
+            }
+
+            .menu-toggle span {
+                width: 30px;
+                height: 3px;
+                background-color: white;
+                margin: 5px;
+                display: block;
+                transition: all 0.3s ease;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="image.webp" alt="Logo">
+        <div class="menu-toggle" onclick="toggleMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="price.html">Products</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="form.html">Cart</a></li>
+                <li><a href="feedback.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+        <div class="form-container">
+            <h2 class="text-center mb-4">Select Items</h2>
+            <form id="frm-select-items" action="javascript:void(0);" onsubmit="return submitForm()">
+                <div class="form-group">
+                    <label for="jeans">Jeans</label>
+                    <input type="checkbox" id="jeans" name="items[]" value="Jeans" onclick="updateCount('jeansCount')">
+                    <input type="text" id="jeansCount" value="0" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="lower">Lower</label>
+                    <input type="checkbox" id="lower" name="items[]" value="Lower" onclick="updateCount('lowerCount')">
+                    <input type="text" id="lowerCount" value="0" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="shirt">Shirt</label>
+                    <input type="checkbox" id="shirt" name="items[]" value="Shirt" onclick="updateCount('shirtCount')">
+                    <input type="text" id="shirtCount" value="0" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="tshirt">T-Shirt</label>
+                    <input type="checkbox" id="tshirt" name="items[]" value="T-Shirt" onclick="updateCount('tshirtCount')">
+                    <input type="text" id="tshirtCount" value="0" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="pant">Pant</label>
+                    <input type="checkbox" id="pant" name="items[]" value="Pant" onclick="updateCount('pantCount')">
+                    <input type="text" id="pantCount" value="0" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="cover">Cover</label>
+                    <input type="checkbox" id="cover" name="items[]" value="Cover" onclick="updateCount('coverCount')">
+                    <input type="text" id="coverCount" value="0" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="bedsheet">Bed Sheet</label>
+                    <input type="checkbox" id="bedsheet" name="items[]" value="Bed Sheet" onclick="updateCount('bedsheetCount')">
+                    <input type="text" id="bedsheetCount" value="0" readonly>
+                </div>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        <p>Modern Laundry System &copy; 2024 | All Rights Reserved</p>
+    </footer>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        function updateCount(countId) {
+            const checkbox = document.getElementById(countId.replace('Count', ''));
+            const countField = document.getElementById(countId);
+            if (checkbox.checked) {
+                countField.value = parseInt(countField.value) + 1;
+            } else {
+                countField.value = Math.max(0, parseInt(countField.value) - 1);
+            }
+        }
+
+        function submitForm() {
+            const items = [];
+            document.querySelectorAll('input[name="items[]"]:checked').forEach(item => {
+                items.push(item.value + " (" + document.getElementById(item.id + 'Count').value + ")");
+            });
+            alert("Selected items: " + items.join(", "));
+        }
+
+        function toggleMenu() {
+            var nav = document.querySelector('nav ul');
+            nav.classList.toggle('show');
+        }
+    </script>
+</body>
+</html>
